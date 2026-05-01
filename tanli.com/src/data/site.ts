@@ -33,7 +33,7 @@ export const site = {
 
   profile: {
     avatarSrc: 'https://astro.wakri.se/avatar-drakkir.jpg',
-    name: 'Tanli/Drakkir',
+    name: 'Tanli & Drakkir',
     handle: '@tanlidrakkir',
     bio: 'I love dragons! I make figurines and jewelry of polymer clay, though I meddle in all types of creative passions.',
   },

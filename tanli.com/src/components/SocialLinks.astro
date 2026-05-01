@@ -1,12 +1,14 @@
 ---
-//import whatsapp from '../assets/whatsapp.svg?raw';
-//import youtube from '../assets/youtube.svg?raw';
-//import github from '../assets/github.svg?raw';
-//import instagram from '../assets/instagram.svg?raw';
-//import twitter from '../assets/twitter.svg?raw';
-//import linkedin from '../assets/linkedin.svg?raw';
-//import twitch from '../assets/twitch.svg?raw';
-/*
+import whatsapp from '../assets/whatsapp.svg?raw';
+import youtube from '../assets/youtube.svg?raw';
+import github from '../assets/github.svg?raw';
+import instagram from '../assets/instagram.svg?raw';
+import twitter from '../assets/twitter.svg?raw';
+import linkedin from '../assets/linkedin.svg?raw';
+import twitch from '../assets/twitch.svg?raw';
+import flickr from '../assets/flickr.svg?raw';
+import facebook from '../assets/facebook.svg?raw';
+
 interface SocialLink {
   href: string;
   ariaLabel: string;
@@ -27,13 +29,14 @@ const icons: Record<string, string> = {
   twitter,
   linkedin,
   twitch,
+  flickr,
+  facebook,
 };
-*/
 ---
 
 <div class='flex justify-center gap-2 flex-wrap'>
   {
-/*    links.map((link) => (
+    links.map((link) => (
       <a
         href={link.href}
         target='_blank'
@@ -43,5 +46,5 @@ const icons: Record<string, string> = {
         set:html={icons[link.icon]}
       />
     ))
-*/  }
+  }
 </div>

@@ -1,4 +1,4 @@
 allowBuilds:
   esbuild: true
   sharp: true
-  @parcel/watcher: true
+  \@parcel/watcher@2.5.6: true

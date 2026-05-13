@@ -1,0 +1,96 @@
+---
+/**
+ * About page
+ * URL: /about
+ */
+import LandingLayout from '@/layouts/LandingLayout.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import Button from '@/components/ui/form/Button/Button.astro';
+import { Hero } from '@/components/hero';
+import TypingEffect from '@/components/ui/TypingEffect.astro';
+import TechStack from '@/components/landing/TechStack.astro';
+import { getCalendarItems, type CalendarItem as CalendarConfigItem } from '@/config/calendar.config';
+const Activities = getCalendarItems().map((item: CalendarConfigItem) => ({
+  title: item.title,
+  icon: item.icon,
+  rsvp: item.rsvp,
+  startDate: item.startDate,
+  endDate: item.endDate,
+  description: item.description,
+  price: item.price,
+  order: item.order,
+}));
+---
+<LandingLayout
+  title="Kalendarium"
+  description="Vi annordnar flera olika aktiviteter under året, som marknader, kurser, föreningsmiddagar mm."
+>
+  <!-- Kalender -->
+  <section class="py-[var(--space-section-md)] border-t border-border">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="mb-8 text-center flex flex-col items-center gap-4" data-reveal>
+        <div class="flex flex-col items-center gap-6">
+          <h2 class="font-display text-4xl font-bold text-foreground">
+            Kalendarium
+          </h2>
+        </div>
+        <p class="text-lg text-foreground-muted max-w-2xl mx-auto text-balance">
+          <b>Detta händer i vår förening under den närmaste tiden.</b><br />
+        </p>
+        <p class="text-lg text-foreground-muted max-w-2xl mx-auto text-balance">
+          Vill du delta på en aktivitet kontaktar du oss via vår <a href="/contact" class="underline underline-offset-2 decoration-brand-500 hover:text-brand-400 transition-colors">info-adress</a>. Då får du mer detaljerade uppgifter kring aktiviteten.<br />
+          Kom ihåg att ange dina kontaktuppgifter vid anmälan;<br />
+          <b>namn</b>, <b>telefon</b> och <b>e-post</b>.
+        </p>
+        <p class="text-lg text-foreground-muted max-w-2xl mx-auto text-balance">
+          Vill du prova på att slöjda? Föreningen arrangerar några slöjdkurser varje år som är öppna <b>även för de som inte är medlemmar i föreningen</b>. 
+          Utmärkt för nybörjare och allt material ingår!
+        </p>
+        <p class="text-lg text-foreground-muted max-w-2xl mx-auto text-balance">
+          Du betalar till föreningens plusgiro: 495 18 82 – 2
+        </p>
+      </div>
+      <div class="grid gap-8 md:grid-cols-3">
+        {Activities.map((activity: any) => 
+        <Card hover data-reveal>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
+              <Icon name={activity.icon} size="md" />
+            </div>
+            <div class="flex flex-col gap-4">
+              <div class="flex-1 min-w-0">
+                <h3 class="text-base font-semibold text-foreground">{activity.title}</h3>
+                {activity.description.map((description: any) => <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
+                  {description}
+                </p>)}
+              </div>
+              <div class="flex-1">
+                <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
+                  {activity.startDate.valueOf() === activity.endDate.valueOf() &&
+                    <span><b>Datum:</b> {activity.startDate.toLocaleDateString('sv-SE')}<br /></span> ||
+                    <span><b>Start:</b> {activity.startDate.toLocaleDateString('sv-SE')}<br /></span>
+                    <span><b>Slut:</b> {activity.endDate.toLocaleDateString('sv-SE')}<br /></span>
+                  }
+                  <b>OSA:</b> <span style={`color: ${(activity.rsvp < new Date().setHours(0,0,0,0)) && "red"}`}>{activity.rsvp.toLocaleDateString('sv-SE')}</span><br />
+                  {activity.price.length > 0 && 
+                    <span><b>Pris:</b> {activity.price}</span>
+                  }
+                </p> 
+              </div>
+            </div>
+          </div>
+        </Card>
+        )}
+      </div>
+    </div>
+  </section>
+
+
+  
+<style>
+  details[open] > summary .faq-icon {
+    transform: rotate(180deg);
+  }
+</style>

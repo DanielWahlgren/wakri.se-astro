@@ -1,0 +1,267 @@
+---
+import LandingLayout from '@/layouts/LandingLayout.astro';
+import { Hero } from '@/components/hero';
+import Button from '@/components/ui/form/Button/Button.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+import BlogCard from '@/components/blog/BlogCard.astro';
+import { getCollection } from 'astro:content';
+import siteConfig from '@/config/site.config';
+import { Image } from 'astro:assets';
+import bshbanner from '../assets/bshbanner.jpg';
+
+import { getCalendarItems, type CalendarItem as CalendarConfigItem } from '@/config/calendar.config';
+const Activities = getCalendarItems().slice(0,3).map((item: CalendarConfigItem) => ({
+  title: item.title,
+  icon: item.icon,
+  rsvp: item.rsvp,
+  startDate: item.startDate,
+  endDate: item.endDate,
+  description: item.description,
+  price: item.price,
+  order: item.order,
+}));
+
+
+const projectItems = await getCollection('projects');
+const featuredProjects = projectItems
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 4);
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => {
+    if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+    return b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf();
+  })
+  .slice(0, 3);
+---
+
+<LandingLayout
+  title="Välkommen"
+  description="Varmt välkommen till Botkyrka-Salem hemslöjdsförening. Hemslöjd och hantverk söder om Stockholm"
+  image="/og-default.svg"
+  includePersonSchema={true}
+  includeProfessionalServiceSchema={true}
+>
+  <!-- Hero -->
+  <Hero layout="centered" size="xl" class="hero-dark-gradient" showScrollIndicator>
+    <h1 slot="title">
+      <span class="text-brand-500 dark:text-foreground [-webkit-text-fill-color:currentColor]">Välkommen</span>
+    </h1>
+
+    <p slot="description">
+      Varmt välkommen till Botkyrka-Salem hemslöjdsförening. Hemslöjd och hantverk söder om Stockholm. Här kan du se vilka slöjdare vi är, samt våra marknader och andra aktiviteter.
+    </p>
+    <Image src={bshbanner} alt="Banner med exempel på slöjd." priority />
+
+  </Hero>
+
+  <!-- Services Section -->
+  <section class="relative z-10 py-[var(--space-section-md)] bg-background-secondary border-t border-border">
+    <div class="mx-auto max-w-6xl px-6 flex flex-col gap-8">
+      <div class="flex flex-col items-center gap-4 text-center" data-reveal>
+        <div class="flex flex-col items-center gap-6">
+          <Badge variant="brand" pill>Om oss</Badge>
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
+            Vad vi gör
+          </h2>
+        </div>
+        <p class="text-lg text-foreground-muted max-w-2xl mx-auto">
+          Gammal tradition, ung attityd.
+        </p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <!-- Kurser -->
+        <Card hover data-reveal>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
+              <Icon name="graduation-cap" size="sm" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-base font-semibold text-foreground">Kurser</h3>
+              <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
+                Vill du prova på att slöjda? Föreningen arrangerar några slöjdkurser varje år. Utmärkt för nybörjare och allt material ingår!
+              </p>
+            </div>
+          </div>
+        </Card>
+
+        <!-- Aktiviteter -->
+        <Card hover data-reveal data-reveal-delay="1">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
+              <Icon name="calendar-days" size="sm" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-base font-semibold text-foreground">Aktiviteter</h3>
+              <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
+                Under året medverkar vi i flera aktiviteter, både i egen regi och tillsammans med andra föreningar.
+              </p>
+            </div>
+          </div>
+        </Card>
+
+        <!-- Julmarknad -->
+        <Card hover data-reveal data-reveal-delay="2">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
+              <Icon name="dessert" size="sm" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-base font-semibold text-foreground">Julmarkad</h3>
+              <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
+                Vårt största event under året som samlar nästan hela föreningen med god julstämning!
+              </p>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Portfolio -->
+  <section id="work" class="relative z-10 py-[var(--space-section-md)] bg-background-secondary border-t border-border">
+    <div class="mx-auto max-w-6xl px-6 flex flex-col gap-8">
+      <div class="flex flex-col items-center gap-4 text-center" data-reveal>
+        <div class="flex flex-col items-center gap-6">
+          <Badge variant="brand" pill>Kalendarium</Badge>
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
+            På gång i BSH
+          </h2>
+        </div>
+        <p class="text-lg text-foreground-muted max-w-2xl mx-auto">
+          Kommande aktiviteter
+        </p>
+      </div>
+      <div class="grid gap-8 md:grid-cols-3">
+        {Activities.map((activity: any) => 
+        <Card hover data-reveal>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
+              <Icon name={activity.icon} size="md" />
+            </div>
+            <div class="flex flex-col gap-4">
+              <div class="flex-1 min-w-0">
+                <h3 class="text-base font-semibold text-foreground">{activity.title}</h3>
+                {activity.description.map((description: any) => <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
+                  {description}
+                </p>)}
+              </div>
+              <div class="flex-1">
+                <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
+                  {activity.startDate.valueOf() === activity.endDate.valueOf() &&
+                    <span><b>Datum:</b> {activity.startDate.toLocaleDateString('sv-SE')}<br /></span> ||
+                    <span><b>Start:</b> {activity.startDate.toLocaleDateString('sv-SE')}<br /></span>
+                    <span><b>Slut:</b> {activity.endDate.toLocaleDateString('sv-SE')}<br /></span>
+                  }
+                  <b>OSA:</b> <span style={`color: ${(activity.rsvp < new Date().setHours(0,0,0,0)) && "red"}`}>{activity.rsvp.toLocaleDateString('sv-SE')}</span><br />
+                  {activity.price.length > 0 && 
+                    <span><b>Pris:</b> {activity.price}</span>
+                  }
+                </p> 
+              </div>
+            </div>
+          </div>
+        </Card>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section class="relative z-10 py-[var(--space-section-md)] bg-background-secondary border-t border-border">
+    <div class="mx-auto max-w-6xl px-6 flex flex-col gap-8">
+      <div class="flex items-end justify-between" data-reveal>
+        <div class="flex flex-col gap-6">
+          <Badge variant="brand" pill class="self-start">Från vår blog</Badge>
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
+            Utvalt
+          </h2>
+        </div>
+        <a href="/blog" class="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-brand-500 hover:text-brand-600 transition-colors shrink-0">
+          Se alla bloggposter
+          <Icon name="arrow-right" size="sm" />
+        </a>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        {posts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            href={`/blog/${post.id.replace('en/', '')}`}
+            publishedAt={post.data.publishedAt}
+            tags={post.data.tags}
+            author={post.data.author}
+            image={post.data.image}
+            svgSlug={post.data.svgSlug}
+          />
+        ))}
+      </div>
+
+      <div class="text-center sm:hidden">
+        <Button variant="outline" href="/blog">
+          Se alla bloggposter
+          <Icon name="arrow-right" size="sm" />
+        </Button>
+      </div>
+    </div>
+  </section>
+
+ <!-- CTA -->
+  <section class="relative z-10 py-[var(--space-section-md)] bg-background">
+    <div class="mx-auto max-w-2xl px-6 text-center" data-reveal>
+      <h2 class="font-display text-4xl font-bold text-foreground mb-4 text-balance">
+        Vill du vara med?
+      </h2>
+      <p class="text-lg text-foreground-muted mb-8 text-balance">
+        Du behöver inte slöjda själv för att bli medlem, stödmedlemmar är också välkomna!
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button size="lg" href="/membership">
+          Bli medlem
+          <Icon name="arrow-right" size="sm" />
+        </Button>
+        <Button size="lg" variant="outline" href="/contact">
+          Kontakta oss
+        </Button>
+      </div>
+    </div>
+  </section>
+
+<script>
+  function initCountup() {
+    const counters = document.querySelectorAll<HTMLElement>('[data-countup]:not([data-countup-init])');
+    if (counters.length === 0) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        const el = entry.target as HTMLElement;
+        const target = parseInt(el.dataset.countup ?? '0', 10);
+        const suffix = el.dataset.suffix ?? '';
+        const duration = 1200;
+        const start = performance.now();
+        const tick = (now: number) => {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(eased * target) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.4 });
+    counters.forEach((el) => {
+      el.dataset.countupInit = 'true';
+      observer.observe(el);
+    });
+  }
+
+  initCountup();
+</script>
+
+</LandingLayout>

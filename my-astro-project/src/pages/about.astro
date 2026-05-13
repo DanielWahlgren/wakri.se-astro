@@ -1,0 +1,100 @@
+---
+/**
+ * About page
+ * URL: /about
+ */
+import LandingLayout from '@/layouts/LandingLayout.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import { Hero } from '@/components/hero';
+import TypingEffect from '@/components/ui/TypingEffect.astro';
+
+---
+<LandingLayout
+  title="Om Botkyrka-Salem Hemslöjdsförening"
+  description="Föreningsfakta, hemslöjdsbladet och Slöjdriktlinjer"
+  image="/og-default.svg"
+  includePersonSchema={true}
+  includeProfessionalServiceSchema={true}
+>
+
+  <Hero layout="centered" size="sm"  class="hero-dark-gradient">
+    <h1 slot="title">
+      <span class="text-foreground [-webkit-text-fill-color:currentColor]">Botkyrka-Salem Hemslöjdsförening</span><br />
+      <span class="text-brand-500 [-webkit-text-fill-color:var(--color-brand-500)]">
+        <TypingEffect words={["Textil", "Blandad slöjd", "Keramik", "Smycken", "Tennbroderier", "Träslöjd", "Metallslöjd", "Ätbart"]} />
+      </span>
+    </h1>
+
+  </Hero>
+  <!-- What's possible now -->
+  <section class="py-[var(--space-section-md)] bg-brand-500/8 dark:bg-background-secondary">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="grid gap-12 lg:grid-cols-2">
+        <!-- Left: text -->
+        <div class="flex flex-col gap-4" data-reveal="right">
+          <div class="flex flex-col gap-6">
+            <Badge variant="brand" pill class="self-start">Föreningsfakta</Badge>
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
+              En ideell förening!
+            </h2>
+          </div>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Botkyrka-Salem hemslöjdsförening är en ideell förening. Vi värnar om de äldre slöjdteknikerna och materialen, men nya och moderna får också utrymme.
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Som slöjdare är du varmt välkommen till vår gemenskap. Du som tycker om hemslöjd och vill att den ska leva kvar får gärna vara <a href="/membership" class="underline underline-offset-2 decoration-brand-500 hover:text-brand-400 transition-colors">stödmedlem</a>.
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Föreningen arrangerar flera <a href="/calendar" class="underline underline-offset-2 decoration-brand-500 hover:text-brand-400 transition-colors">slöjdkurser</a> varje år. Utmärkt för nybörjare och allt material ingår!
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            År 1978 startade slöjdare i Botkyrka kommun hemslöjdsföreningen. Vi hade samma år vår första julmarknad med utställning av slöjdade artiklar. Tidigare hade vi ett hemslöjdscafé där vi ställde ut vår slöjd och sålde fika. Den verksamheten bedrev vi i 40 år, fram till 2023. Efter det arbetar vi med utställningar, marknader och kurser på olika platser i södra storstockholm.
+          </p>
+        </div>
+        <!-- Right: two stacked partner cards -->
+        <div class="flex flex-col gap-4 h-full" data-reveal="left" data-reveal-delay="1">
+          <Card variant="elevated" padding="md" hover={true} href="/files/BSH-stadgar-2014.pdf" target="_blank" rel="noopener noreferrer" class="h-full text-center">
+            <div class="flex flex-col items-center gap-[var(--space-stack-sm)]">
+              <div class="tech-icon-wrap">
+                <Icon name="download" size="lg" />
+              </div>
+              <span class="font-display text-lg font-bold text-foreground">Stadgar (PDF)</span>
+            </div>
+          </Card>
+          <Card variant="elevated" padding="md" hover={true} href="/files/Slojdriktlinjer-22-04-22.pdf" target="_blank" rel="noopener noreferrer" class="h-full text-center">
+            <div class="flex flex-col items-center gap-[var(--space-stack-sm)]">
+              <div class="tech-icon-wrap">
+                <Icon name="download" size="lg" />
+              </div>
+              <span class="font-display text-lg font-bold text-foreground">Slöjdriktlinjer (PDF)</span>
+            </div>
+          </Card>
+          <Card variant="elevated" padding="md" hover={true} href="/files/Inlamningslista-slojd.pdf" target="_blank" rel="noopener noreferrer" class="h-full text-center">
+            <div class="flex flex-col items-center gap-[var(--space-stack-sm)]">
+              <div class="tech-icon-wrap">
+                <Icon name="download" size="lg" />
+              </div>
+              <span class="font-display text-lg font-bold text-foreground">Inlämningslista för slöjd (PDF)</span>
+            </div>
+          </Card>
+          <Card variant="elevated" padding="md" hover={true} href="/files/Slojdforsaljningslista.-xcl.pdf" target="_blank" rel="noopener noreferrer" class="h-full text-center">
+            <div class="flex flex-col items-center gap-[var(--space-stack-sm)]">
+              <div class="tech-icon-wrap">
+                <Icon name="download" size="lg" />
+              </div>
+              <span class="font-display text-lg font-bold text-foreground">Försäljningslista för slöjd (PDF)</span>
+            </div>
+          </Card>
+        </div>
+      </div>
+    </div>
+  </section>
+</LandingLayout>
+
+<style>
+  details[open] > summary .faq-icon {
+    transform: rotate(180deg);
+  }
+</style>

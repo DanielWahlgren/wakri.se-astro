@@ -1,0 +1,92 @@
+---
+/**
+ * Membership page
+ * URL: /membership
+ */
+import LandingLayout from '@/layouts/LandingLayout.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import { Hero } from '@/components/hero';
+import TypingEffect from '@/components/ui/TypingEffect.astro';
+
+---
+<LandingLayout
+  title="Medlemskap i Botkyrka-Salem Hemslöjdsförening"
+  description="Om du är slöjdare och vill sälja din slöjd på våra marknader så måste du vara medlem."
+  image="/og-default.svg"
+  includePersonSchema={true}
+  includeProfessionalServiceSchema={true}
+>
+
+  <Hero layout="centered" size="sm"  class="hero-dark-gradient">
+    <h1 slot="title">
+      <span class="text-foreground [-webkit-text-fill-color:currentColor]">Bli medlem</span><br />
+    </h1>
+    <p slot="description">
+      Om du är slöjdare och vill sälja din slöjd på våra marknader så måste du vara medlem.
+    </p>
+  </Hero>
+  <!-- What's possible now -->
+  <section class="py-[var(--space-section-md)] bg-brand-500/8 dark:bg-background-secondary">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="grid gap-12 lg:grid-cols-2">
+        <!-- Left: text -->
+        <div class="flex flex-col gap-4" data-reveal="right">
+          <div class="flex flex-col gap-6">
+            <Badge variant="brand" pill class="self-start">Medlemsskap</Badge>
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
+              Medlemsskap i en fantastisk förening
+            </h2>
+          </div>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            <b>Du behöver inte slöjda själv för att bli medlem, stödmedlemmar är också välkomna!</b>
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Som slöjdare är du varmt välkommen till vår gemenskap.<br />
+            Det är lätt att bli medlem. Sätt bara in summan på vårt postgiro 495 18 82-2, och ange att du är ny medlem alternativt familjemedlem. Glöm inte att ange din e-postadress och telefonnummer så att vi får kontakt. Betala senast den sista februari.
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Du kan också swisha till oss på nummer <b>123 319 87 93</b>.<br />
+            Ange namn och epostadress.
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Årsavgiften år 2025 är 150 kronor. Årsavgift för två familjemedlemmar är 250 kronor och är det tre eller fler familjemedlemmar så kostar det 300 kr.<br />
+            Med familj menas att man bor på samma adress.
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Om du är slöjdare och vill sälja din slöjd på våra marknader så måste du vara medlem.
+            Läs igenom våra <a href="/about" class="underline underline-offset-2 decoration-brand-500 hover:text-brand-400 transition-colors">slöjdriktlinjer</a> och fundera på om din slöjd stämmer mot dem. Lämna in exempel till oss, så får du tips om hur du kan vidareutveckla din slöjd.
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Kontakta oss via vår <a href="/contact" class="underline underline-offset-2 decoration-brand-500 hover:text-brand-400 transition-colors">info-adress</a> så svarar vi på eventuella funderingar du har.
+          </p>
+        </div>
+        <!-- Right: two stacked partner cards -->
+        <!-- Left: text -->
+        <div class="flex flex-col gap-4" data-reveal="right">
+          <div class="flex flex-col gap-6">
+            <Badge variant="brand" pill class="self-start">Perks!</Badge>
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
+              Fördelarna med medlemskap
+            </h2>
+          </div>
+          <ol class="list-decimal text-lg text-foreground-muted leading-relaxed">
+            <li>Vi hjälps åt att sälja slöjd på olika små eller stora marknader och butiker och på våra julmarknader.</li>
+            <li>Du får möjlighet att diskutera slöjdidéer med någon ur styrelsen.</li>
+            <li>Du kan få din slöjd exponerad på hemsidan och på utställningar.</li>
+            <li>Du får möjlighet att träffa andra slöjdare och ingå i en intressegemenskap.</li>
+            <li>Du får möjlighet att arrangera kurskvällar eller kurshelger tillsammans med en kollega.</li>
+            <li>Som förening hjälps vi åt med verksamheten. Vi är inte så många, så ditt bidrags behövs, i stort och smått.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+</LandingLayout>
+
+<style>
+  details[open] > summary .faq-icon {
+    transform: rotate(180deg);
+  }
+</style>

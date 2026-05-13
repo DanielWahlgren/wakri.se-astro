@@ -1,0 +1,136 @@
+---
+/**
+ * About page
+ * URL: /integritypolicy
+ */
+import LandingLayout from '@/layouts/LandingLayout.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import { Hero } from '@/components/hero';
+import TypingEffect from '@/components/ui/TypingEffect.astro';
+
+---
+<LandingLayout
+  title="Integritetspolicy - Botkyrka-Salem Hemslöjdsförening"
+  description="Integritetspolicy för Botkyrka-Salem Hemslöjdsförening"
+  image="/og-default.svg"
+  includePersonSchema={true}
+  includeProfessionalServiceSchema={true}
+>
+
+  <Hero layout="centered" size="sm"  class="hero-dark-gradient">
+    <h1 slot="title">
+      <span class="text-foreground [-webkit-text-fill-color:currentColor]">Integritetspolicy</span><br />
+    </h1>
+
+  </Hero>
+  <!-- What's possible now -->
+  <section class="py-[var(--space-section-md)] bg-brand-500/8 dark:bg-background-secondary">
+    <div class="mx-auto max-w-4xl px-6">
+      <div class="grid gap-12">
+        <!-- Section -->
+        <div class="flex flex-col gap-4" data-reveal="right">
+          <div class="flex flex-col gap-6">
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
+              Vilka personuppgifter vi samlar in och varför vi samlar in dem
+            </h2>
+          </div>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Botkyrka Salem hemslöjdsförening lagrar och använder dina personuppgifter som medlem i enlighet med personuppgiftslagen GDPR. Uppgifterna kommer inte att lämnas ut till utomstående personer eller organisationer, annat än om det följer av offentlighetsprincipen. Uppgifterna förvaras digitalt på en plats som endast styrelsen kommer åt.
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Vi behandlar de personuppgifter om dig som du lämnar till oss för att kunna göra utskick av medlemstidskriften samt för att kunna kontakta dig i frågor som rör föreningens verksamhet. De personuppgifter som vi kan komma att behandla är ditt namn, din adress, ditt telefonnummer och din e-postadress.
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Vi är skyldigt att på din begäran rätta, blockera och utplåna uppgifter. Hela personuppgiftslagen hittar du på Riksdagens webbplats.
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Botkyrka Salem hemslöjdsförening, organisationsnummer 8128006106, är personuppgiftsansvarig för uppgifterna enligt lagen om personuppgifter.
+          </p>
+        </div>
+        <!-- Section -->
+        <div class="flex flex-col gap-4" data-reveal="right">
+          <div class="flex flex-col gap-6">
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
+              Cookie-filer
+            </h2>
+          </div>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Om du har ett konto och loggar in på denna webbplats kommer vi att skapa en tillfällig cookie-fil för att kontrollera om din webbläsare accepterar cookie-filer. Denna cookie-fil innehåller ingen personligt identifierbar information och försvinner när du stänger din webbläsare.
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            När du loggar in kommer vi dessutom att skapa flera cookie-filer för att spara information om din inloggning och dina val för utformning av skärmlayouten. Cookie-filer för inloggning gäller i två dagar och cookie-filer för layoutval gäller i ett år. Om du kryssar i ”Kom ihåg mig” kommer din cookie att finnas kvar i två veckor. Om du loggar ut från ditt konto kommer cookie-filerna för inloggning att tas bort.
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Om du redigerar eller publicerar en artikel kommer en extra cookie-fil att sparas i din webbläsare. Denna cookie-fil innehåller inga personuppgifter utan anger endast inläggs-ID för den artikel du just redigerade. Den gäller under 1 dygn.
+          </p>
+        </div>
+        <!-- Section -->
+        <div class="flex flex-col gap-4" data-reveal="right">
+          <div class="flex flex-col gap-6">
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
+              Inbäddad innehåll från andra webbplatser
+            </h2>
+          </div>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Artiklar på denna webbplats kan innehålla inbäddat innehåll (exempelvis videoklipp, bilder, artiklar o.s.v.). Inbäddat innehåll från andra webbplatser beter sig precis på samma sätt som om besökaren har besökt den andra webbplatsen.
+          </p>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Dessa webbplatser kan samla in uppgifter om dig, använda cookie-filer, bädda in ytterligare spårning från tredje part och övervaka din interaktion med sagda inbäddade innehåll, inklusive spårning av din interaktion med detta inbäddade innehåll om du har ett konto och är inloggad på webbplatsen i fråga.
+          </p>
+        </div>
+        <!-- Section -->
+        <div class="flex flex-col gap-4" data-reveal="right">
+          <div class="flex flex-col gap-6">
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
+              Vilka vi delar dina data med
+            </h2>
+          </div>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Botkyrka-Salem Hemslöjdsförening delar inte dina data med någon utomstående, förutom vid de undantag som nämns i denna policy.
+          </p>
+        </div>
+        <!-- Section -->
+        <div class="flex flex-col gap-4" data-reveal="right">
+          <div class="flex flex-col gap-6">
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
+              Hur länge vi behåller era uppgifter
+            </h2>
+          </div>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            För användare som registrerar sig på er webbplats (om sådana finns) sparar vi även de personuppgifter de anger i sin användarprofil. Alla användare kan se, redigera eller radera sina personuppgifter när som helst (med undantaget att de inte kan ändra sitt användarnamn). Även webbplatsens administratörer kan se och redigera denna information.
+          </p>
+        </div>
+        <!-- Section -->
+        <div class="flex flex-col gap-4" data-reveal="right">
+          <div class="flex flex-col gap-6">
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
+              Vilka rättigheter du har över dina data
+            </h2>
+          </div>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Om du har ett konto  kan du begära en exportfil med de personuppgifter vi har om dig, inklusive alla uppgifter du har gett oss. Du kan också begära att vi tar bort alla personuppgifter vi har om dig. Detta omfattar inte eventuella uppgifter som vi är tvungna att spara av administrativa, legala eller säkerhetsändamål.
+          </p>
+        </div>
+        <!-- Section -->
+        <div class="flex flex-col gap-4" data-reveal="right">
+          <div class="flex flex-col gap-6">
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
+              Din kontaktinformation
+            </h2>
+          </div>
+          <p class="text-lg text-foreground-muted leading-relaxed">
+            Vid ytterligare frågor om vår policy, kontakta oss via vår <a href="/contact" class="underline underline-offset-2 decoration-brand-500 hover:text-brand-400 transition-colors">info-adress</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</LandingLayout>
+
+<style>
+  details[open] > summary .faq-icon {
+    transform: rotate(180deg);
+  }
+</style>

@@ -1,5 +1,5 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "extends": "astro/tsconfigs/strict", // Why does this show an error? And now it doesn't...
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"]

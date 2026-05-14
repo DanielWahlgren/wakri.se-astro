@@ -4,20 +4,19 @@ import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
-import vercel from '@astrojs/vercel';
-import netlify from '@astrojs/netlify';
 
 import sanity from '@sanity/astro';
 
-const isNetlify = process.env.DEPLOY_TARGET === 'netlify';
-
 export default defineConfig({
   output: 'static',
-  adapter: isNetlify ? netlify() : vercel(),
   site: process.env.SITE_URL || 'https://example.com',
 
   build: {
     inlineStylesheets: 'always',
+    format: 'file',
+  },
+  prefetch: {
+    prefetchAll: true
   },
 
   env: {
@@ -44,6 +43,7 @@ export default defineConfig({
       projectId: "aax3sace",
       dataset: "production",
       useCdn: false, // for static builds
+      studioRouterHistory: 'hash',
     })],
 
   vite: {

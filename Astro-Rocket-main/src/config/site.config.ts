@@ -120,30 +120,22 @@ export interface SiteConfig {
 }
 
 const siteConfig: SiteConfig = {
-  name: 'Astro Rocket',
+  name: 'BSH',
   description:
-    'Astro Rocket — A production-ready Astro 6 starter with 12 beautiful themes, 57+ components, built-in i18n, dark mode and a fast, modern foundation to build anything on.',
-  url: SITE_URL || 'https://astrorocket.dev',
+    'Gammal tradition, ung attityd.',
+  url: SITE_URL || 'https://bsh.wakri.se',
   ogImage: '/og-default.svg',
-  author: 'Hans Martens',
-  email: 'hello@hansmartens.dev',
+  author: 'Botkyrka-Salem Hemslöjdsförening',
+  email: 'info@botkyrka-salem-hemslojd.se',
   address: {
     street: '',
-    city: 'Veghel',
+    city: '',
     state: '',
     zip: '',
-    country: 'the Netherlands',
+    country: '',
   },
   socialLinks: [
-    'https://github.com/hansmartensdev',
-    'https://x.com/hansmartens_dev',
-    'https://www.linkedin.com',
-    'https://bsky.app/profile/hansmartensdev.bsky.social',
   ],
-  twitter: {
-    site: 'https://x.com/hansmartens_dev',
-    creator: '@hansmartens_dev',
-  },
   verification: {
     google: GOOGLE_SITE_VERIFICATION,
     bing: BING_SITE_VERIFICATION,
@@ -186,7 +178,7 @@ const siteConfig: SiteConfig = {
       svg: '/favicon.svg',
     },
     colors: {
-      themeColor: '#3b82f6',
+      themeColor: '#d18600',
       backgroundColor: '#ffffff',
     },
   },

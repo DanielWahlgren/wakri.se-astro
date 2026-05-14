@@ -8,6 +8,8 @@ import vercel from '@astrojs/vercel';
 import netlify from '@astrojs/netlify';
 import i18nConfig from './src/config/i18n.config.ts';
 
+import sanity from '@sanity/astro';
+
 const isNetlify = process.env.DEPLOY_TARGET === 'netlify';
 
 /**
@@ -58,12 +60,12 @@ export default defineConfig({
     layout: 'constrained',
   },
 
-  integrations: [
-    react(),
-    mdx(),
-    sitemap(),
-    icon(),
-  ],
+  integrations: [react(), mdx(), sitemap(), icon(), sanity({
+      projectId: "aax3sace",
+      dataset: "production",
+      useCdn: false, // for static builds
+      studioRouterHistory: 'hash',
+    })],
 
   vite: {
     plugins: [tailwindcss()],

@@ -10,13 +10,6 @@ import LighthouseScores from '@/components/landing/LighthouseScores.astro';
 import LetterGlitchBand from '@/components/patterns/LetterGlitchBand.astro';
 import { getCollection } from 'astro:content';
 import siteConfig from '@/config/site.config';
-import type { SanityDocument } from "@sanity/client";
-import { sanityClient } from "sanity:client";
-
-const LANDING_QUERY = `*[_id == "landingPage"][0]{ _id, title, heroBadge, heroText}`;
-
-const sanityLandingPage = await sanityClient.fetch<SanityDocument[]>(LANDING_QUERY);
-console.log(sanityLandingPage.heroText)
 
 const projectItems = await getCollection('projects');
 const featuredProjects = projectItems
@@ -40,14 +33,15 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 >
   <!-- Hero -->
   <Hero layout="centered" size="xl" class="hero-dark-gradient" showScrollIndicator>
-    <Badge slot="badge" variant="brand" pill pulse class="dark:text-brand-200">{sanityLandingPage.heroBadge}</Badge>
+    <Badge slot="badge" variant="brand" pill pulse class="dark:text-brand-200">Available for new projects</Badge>
 
     <h1 slot="title">
-      <span class="text-brand-600 dark:text-foreground [-webkit-text-fill-color:currentColor]">{sanityLandingPage.title}</span>
+      <span class="text-brand-600 dark:text-foreground [-webkit-text-fill-color:currentColor]">Astro Rocket —</span><br />
+      <span class="text-brand-600 dark:text-foreground [-webkit-text-fill-color:currentColor]">Web Designer</span><span class="text-brand-600 dark:text-foreground [-webkit-text-fill-color:currentColor]"> &amp; Developer</span>
     </h1>
 
     <p slot="description">
-      {sanityLandingPage.heroText}
+      Astro 6 starter with 12 beautiful themes, 57+ components, dark mode and a fast, modern foundation to build anything on.
     </p>
 
    <Fragment slot="actions">

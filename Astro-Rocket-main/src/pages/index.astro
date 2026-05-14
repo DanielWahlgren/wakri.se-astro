@@ -12,11 +12,22 @@ import { getCollection } from 'astro:content';
 import siteConfig from '@/config/site.config';
 import type { SanityDocument } from "@sanity/client";
 import { sanityClient } from "sanity:client";
+import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url";
+import { PortableText } from "astro-portabletext";
 
-const LANDING_QUERY = `*[_id == "landingPage"][0]{ _id, title, heroBadge, heroText}`;
+const LANDING_QUERY = `*[_type == "landingPage"][0]`;
+const landingPage = await sanityClient.fetch<SanityDocument>(LANDING_QUERY, Astro.params);
+console.log(landingPage.heroBadge)
 
-const sanityLandingPage = await sanityClient.fetch<SanityDocument[]>(LANDING_QUERY);
-console.log(sanityLandingPage.heroText)
+const { projectId, dataset } = sanityClient.config();
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset
+    ? createImageUrlBuilder({ projectId, dataset }).image(source)
+    : null;
+const landingImageUrl = landingPage.heroImg
+  ? urlFor(landingPage.heroImg)?.width(960).height(246).url()
+  : null;
+
 
 const projectItems = await getCollection('projects');
 const featuredProjects = projectItems
@@ -40,27 +51,26 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 >
   <!-- Hero -->
   <Hero layout="centered" size="xl" class="hero-dark-gradient" showScrollIndicator>
-    <Badge slot="badge" variant="brand" pill pulse class="dark:text-brand-200">{sanityLandingPage.heroBadge}</Badge>
+    <Badge slot="badge" variant="brand" pill pulse class="dark:text-brand-200">{landingPage.heroBadge}</Badge>
 
     <h1 slot="title">
-      <span class="text-brand-600 dark:text-foreground [-webkit-text-fill-color:currentColor]">{sanityLandingPage.title}</span>
+      <span class="text-brand-600 dark:text-foreground [-webkit-text-fill-color:currentColor]">{landingPage.title}</span>
     </h1>
 
     <p slot="description">
-      {sanityLandingPage.heroText}
+      {landingPage.heroText}
     </p>
-
-   <Fragment slot="actions">
-      <Button size="lg" href="https://github.com/hansmartensdev/Astro-Rocket">
-        Get it on GitHub
-        <Icon name="arrow-right" size="sm" />
-      </Button>
-      <Button size="lg" variant="outline" href="/blog/astro-rocket-getting-started">
-        <Icon name="rocket" size="sm" />
-        Get started
-        <Icon name="arrow-right" size="sm" />
-      </Button>
-    </Fragment>
+{
+    landingImageUrl && (
+      <img
+        src={landingImageUrl}
+        alt={landingPage.title}
+        class="rounded-xl"
+        width="960"
+        height="246"
+      />
+    )
+  }
   </Hero>
 
   <!-- Services Section -->

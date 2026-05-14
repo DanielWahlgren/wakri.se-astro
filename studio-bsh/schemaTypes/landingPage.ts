@@ -15,21 +15,27 @@ export const landingPage = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'slug',
-      type: 'slug',
-      options: {source: 'title'},
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'publishedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: 'heroText',
       type: 'text',
       validation: (rule) => rule.required(),
     }),
-  ],
+defineField({
+  name: 'heroImg',
+  type: 'image',
+  // 👇 Enables crop and hotspot tools
+  options: {
+    hotspot: true
+  },
+  // 👇 Optionally append additional fields to the image object
+  fields: [
+    defineField({
+      name: 'caption',
+      type: 'string',
+    }),
+    defineField({
+      name: 'attribution',
+      type: 'string',
+    })
+  ]
+})  ],
 })

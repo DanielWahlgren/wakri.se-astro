@@ -27,20 +27,17 @@ export interface LegalLink {
 
 export const navItems: NavItem[] = [
   { label: 'Kalendarium', href: '/calendar', order: 1 },
-  { label: 'Blog', href: '/blog', order: 1 },
-  { label: 'Projects', href: '/projects', order: 2 },
-  { label: 'About', href: '/about', order: 3 },
   { label: 'Contact', href: '/contact', order: 4 },
 ];
 
 export const footerNavItems: NavItem[] = [
-  { label: 'Blog', href: '/blog', order: 1 },
-  { label: 'Projects', href: '/projects', order: 2 },
-  { label: 'About', href: '/about', order: 3 },
+  { label: 'Kalendarium', href: '/calendar', order: 1 },
   { label: 'Contact', href: '/contact', order: 4 },
 ];
 
-export const legalLinks: LegalLink[] = [];
+export const legalLinks: LegalLink[] = [
+  { label: 'Integritetspolicy', href: '/integritypolicy' },
+];
 
 /**
  * Get header navigation items sorted by order

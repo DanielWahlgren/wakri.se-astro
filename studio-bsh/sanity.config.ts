@@ -45,6 +45,18 @@ export default defineConfig({
               ),
             S.documentTypeListItem("calendarItems").title("Kalenderhändelser"),
             S.listItem()
+              .title("Kontakt")
+              .id("contact")
+              .child(
+                // Instead of rendering a list of documents, we render a single
+                // document, specifying the `documentId` manually to ensure
+                // that we're editing the single instance of the document
+                S.document()
+                  .schemaType("contact")
+                  .documentId("contact")
+              ),
+            S.documentTypeListItem("contacts").title("Kontakter"),
+            S.listItem()
               .title("404")
               .id("error404")
               .child(

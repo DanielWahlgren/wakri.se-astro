@@ -16,10 +16,18 @@ import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url
 import {getFileAsset, type SanityFileSource} from '@sanity/asset-utils';
 import { PortableText } from "astro-portabletext";
 
+// Content for the Landing Page
 const LANDING_QUERY = `*[_type == "landingPage"][0]`; // {aboutFiles[]{'fileURL': aboutFiles.asset->url, ...}, ...}
 const landingPage = await sanityClient.fetch<SanityDocument>(LANDING_QUERY, Astro.params);
 type aboutFile = SanityFileSource & {titel: string}
-//console.log(landingPage)
+
+// Content for the Calendar
+const CALENDAR_QUERY = `*[_type == "calendar"][0]`; 
+const calendarPage = await sanityClient.fetch<SanityDocument>(CALENDAR_QUERY, Astro.params);
+
+// 3 activities
+const ACTIVITIES_QUERY = `*[_type == "calendarItems"][0..2]`; // 
+const activities = await sanityClient.fetch<SanityDocument>(ACTIVITIES_QUERY, Astro.params);
 
 
 const { projectId, dataset } = sanityClient.config();
@@ -110,50 +118,57 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
   <!-- Kalendarium -->
   { landingPage.visaKalendarium && 
-  <section id="work" class="relative z-10 py-[var(--space-section-md)] bg-background border-t border-border">
-    <div class="mx-auto max-w-6xl px-6 flex flex-col gap-8">
+  <!-- Kalender -->
+  <section class="py-[var(--space-section-md)] border-t border-border">
+    <div class="flex flex-col items-center gap-4 text-center" data-reveal>
       <div class="flex flex-col items-center gap-4 text-center" data-reveal>
         <div class="flex flex-col items-center gap-6">
-          <Badge variant="brand" pill>Selected work</Badge>
+          <Badge variant="brand" pill>{calendarPage.heroBadge}</Badge>
           <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground">
-            Projects I've built
+            {calendarPage.title}
           </h2>
+          <p slot="description">
+            <PortableText value={calendarPage.calendarText} />
+          </p>
         </div>
-        <p class="text-lg text-foreground-muted max-w-2xl mx-auto">
-          A selection of recent work.
-        </p>
       </div>
-
-      <div class="grid gap-6 md:grid-cols-2">
-        {featuredProjects.map((project) => (
-          <Card variant="elevated" hover padding="lg" href={`/projects/${project.id.replace(/\.mdx?$/, '')}`} class="group flex flex-col" data-reveal>
-            <div class="flex flex-1 flex-col">
-              <div class="mb-3 flex items-start justify-between gap-4">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
-                  <Icon name="layers" size="sm" />
+    </div>
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="grid gap-8 md:grid-cols-3">
+        {activities.map((activity: any) => 
+        <Card hover data-reveal>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
+              <Icon name={activity.calendarType} size="md" />
+            </div>
+            <div class="flex flex-col gap-4">
+              <div class="flex-1 min-w-0">
+                <h3 class="text-base font-semibold text-foreground">{activity.title}</h3>
+                <div class="flex flex-col gap-4" data-reveal="right">
+                  <PortableText value={activity.calendarText} />
                 </div>
-                <Icon name="arrow-up-right" size="sm" class="text-foreground-muted group-hover:text-brand-500 transition-colors shrink-0" />
               </div>
-              <div class="mb-2 flex items-baseline gap-2">
-                <h3 class="font-display text-lg font-bold text-foreground">{project.data.title}</h3>
-                {project.data.year && (
-                  <span class="text-xs text-foreground-muted">{project.data.year}</span>
-                )}
-              </div>
-              <p class="text-sm text-foreground-muted leading-relaxed mb-4 flex-1">{project.data.description}</p>
-              <div class="flex flex-wrap gap-1.5">
-                {project.data.tags.map((tag) => (
-                  <Badge variant="brand">{tag}</Badge>
-                ))}
+              <div class="flex-1">
+                <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
+                  {activity.calendarStartDate === activity.calendarEndDate &&
+                    <span><b>Start:</b> {activity.calendarStartDate}<br /></span> ||
+                    <span><b>Start:</b> {activity.calendarStartDate}<br /></span>
+                    <span><b>Slut:</b> {activity.calendarEndDate}<br /></span>
+                  }
+                  <b>OSA:</b> <span style={`color: ${(Date.parse(activity.calendarRSVP) < new Date().setHours(0,0,0,0)) && "red"}`}>{activity.calendarRSVP}</span><br />
+                  {activity.calendarPrice && 
+                    <span><b>Pris:</b> {activity.calendarPrice}</span>
+                  }
+                </p> 
               </div>
             </div>
-          </Card>
-        ))}
+          </div>
+        </Card>
+        )}
       </div>
-
       <div class="flex justify-center">
-        <Button variant="outline" href="/projects">
-          View all projects
+        <Button variant="outline" href="/calendar">
+          Se hela kalendariet
           <Icon name="arrow-right" size="sm" />
         </Button>
       </div>

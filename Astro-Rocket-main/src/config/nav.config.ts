@@ -26,6 +26,7 @@ export interface LegalLink {
 }
 
 export const navItems: NavItem[] = [
+  { label: 'Kalendarium', href: '/calendar', order: 1 },
   { label: 'Blog', href: '/blog', order: 1 },
   { label: 'Projects', href: '/projects', order: 2 },
   { label: 'About', href: '/about', order: 3 },

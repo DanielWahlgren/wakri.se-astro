@@ -19,7 +19,7 @@ import { PortableText } from "astro-portabletext";
 const LANDING_QUERY = `*[_type == "landingPage"][0]`; // {aboutFiles[]{'fileURL': aboutFiles.asset->url, ...}, ...}
 const landingPage = await sanityClient.fetch<SanityDocument>(LANDING_QUERY, Astro.params);
 type aboutFile = SanityFileSource & {titel: string}
-console.log(landingPage)
+//console.log(landingPage)
 
 
 const { projectId, dataset } = sanityClient.config();

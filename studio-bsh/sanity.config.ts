@@ -1,12 +1,12 @@
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemaTypes'
+import {schemaTypes} from './schemaTypes/index'
 
 // Define the actions that should be available for singleton documents
 const singletonActions = new Set(["publish", "discardChanges", "restore"])
 // Define the singleton document types
-const singletonTypes = new Set(["landingPage","error404"])
+const singletonTypes = new Set(["landingPage","error404","calendar"])
 
 export default defineConfig({
   name: 'default',
@@ -21,7 +21,6 @@ export default defineConfig({
         S.list()
           .title("Innehåll")
           .items([
-            // Our singleton type has a list item with a custom child
             S.listItem()
               .title("Hem")
               .id("landingPage")
@@ -34,6 +33,18 @@ export default defineConfig({
                   .documentId("landingPage")
               ),
             S.listItem()
+              .title("Kalendarium")
+              .id("calendar")
+              .child(
+                // Instead of rendering a list of documents, we render a single
+                // document, specifying the `documentId` manually to ensure
+                // that we're editing the single instance of the document
+                S.document()
+                  .schemaType("calendar")
+                  .documentId("calendar")
+              ),
+            S.documentTypeListItem("calendarItems").title("Kalenderhändelser"),
+            S.listItem()
               .title("404")
               .id("error404")
               .child(
@@ -44,9 +55,15 @@ export default defineConfig({
                   .schemaType("error404")
                   .documentId("error404")
               ),
+
+
+            /*
+            // Our singleton type has a list item with a custom child
             // Regular document types
-            // S.documentTypeListItem("postType").title("Blog Posts"),
+            S.documentTypeListItem("error404").title("Kalendarium"),
             //  S.documentTypeListItem("author").title("Authors"),
+
+            */
           ]),
     }),
     visionTool(),

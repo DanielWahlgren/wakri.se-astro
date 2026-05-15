@@ -6,7 +6,7 @@ import {schemaTypes} from './schemaTypes'
 // Define the actions that should be available for singleton documents
 const singletonActions = new Set(["publish", "discardChanges", "restore"])
 // Define the singleton document types
-const singletonTypes = new Set(["landingPage","about"])
+const singletonTypes = new Set(["landingPage","error404"])
 
 export default defineConfig({
   name: 'default',
@@ -34,15 +34,15 @@ export default defineConfig({
                   .documentId("landingPage")
               ),
             S.listItem()
-              .title("Om oss")
-              .id("about")
+              .title("404")
+              .id("error404")
               .child(
                 // Instead of rendering a list of documents, we render a single
                 // document, specifying the `documentId` manually to ensure
                 // that we're editing the single instance of the document
                 S.document()
-                  .schemaType("about")
-                  .documentId("about")
+                  .schemaType("error404")
+                  .documentId("error404")
               ),
             // Regular document types
             // S.documentTypeListItem("postType").title("Blog Posts"),
